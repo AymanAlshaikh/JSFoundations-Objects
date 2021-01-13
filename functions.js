@@ -41,9 +41,8 @@ function numberOfVideos(channel) {
  ****************************************************************/
 function channelHasVideo(videoTitle, channel) {
   // Your code here
-  let title = (element => {element === videoTitle})
-  return channel.videos.some(title);
-}
+  return channel.videos.some((vid) => vid.title.toLowerCase() === videoTitle.toLowerCase())
+}// .some() return true or false
 // console.log(channelHasVideo("The Universal S", channels[0]));
 // console.log(channelHasVideo("The Universal S", channels[1]));
 
@@ -57,8 +56,7 @@ function channelHasVideo(videoTitle, channel) {
  ****************************************************************/
 function getChannelByName(channelName, channels) {
   // Your code here
-  const name = channels.find(element => {element === channelName});
-  return name;
+  return channels.find(namE => namE.name === channelName) //.find() returns undefined if not found
 }
 // console.log(getChannelByName("PowerfulJRE", channels))
 
@@ -72,6 +70,12 @@ function getChannelByName(channelName, channels) {
  ****************************************************************/
 function getChannelByVideoTitle(videoTitle, channels) {
   // Your code here
+  let found;
+  channels.forEach(channel => {channel.videos.forEach(video => {
+    if (video.title===videoTitle) found = channel;
+    })
+  })
+  return found;
 }
 // console.log(channelHasVideo("The Universal S", channels));
 
@@ -85,6 +89,9 @@ function getChannelByVideoTitle(videoTitle, channels) {
  ****************************************************************/
 function searchChannels(query, channels) {
   // Your code here
+  let found = [];
+  found= channels.filter(channel => (channel.name.includes(query) || channel.description.includes(query)))
+  return found;
 }
 // console.log(searchChannels("the", channels))
 
